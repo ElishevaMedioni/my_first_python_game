@@ -23,6 +23,13 @@ while running:
     # attribute the image to my player
     screen.blit(game.player.image, game.player.rect)
 
+    # collect the projectiles of the player
+    for projectile in game.player.all_projectiles:
+        projectile.move()
+
+    # attribute the image to the group of the projectiles
+    game.player.all_projectiles.draw(screen)
+
     # check if the player wants to go right or left
     if game.pressed.get(pygame.K_RIGHT) and game.player.rect.x + game.player.rect.width < screen.get_width():
         game.player.move_right()
@@ -42,6 +49,11 @@ while running:
         # detect if a player leave a keyboard key
         elif event.type == pygame.KEYDOWN:
             game.pressed[event.key] = True
+
+            # detect if the space key is pressed
+            if event.key == pygame.K_SPACE:
+                game.player.launch_projectile()
+
         elif event.type == pygame.KEYUP:
             game.pressed[event.key] = False
             # check which key has been used
