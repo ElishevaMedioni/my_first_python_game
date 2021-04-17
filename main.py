@@ -4,8 +4,8 @@ pygame.init()
 
 
 # load the window of the game
-pygame.display.set_caption("Kill the Death Eaters") #title of the game
-screen = pygame.display.set_mode((1080, 720)) # size of the window (largeur x hauteur)
+pygame.display.set_caption("Kill the Death Eaters")  # title of the game
+screen = pygame.display.set_mode((1080, 720))  # size of the window (largeur x hauteur)
 
 # load the background of the game
 background = pygame.image.load('assets/bg.jpg')
@@ -23,6 +23,9 @@ while running:
     # attribute the image to my player
     screen.blit(game.player.image, game.player.rect)
 
+    # actualise the health bar of the player
+    game.player.update_health_bar(screen)
+
     # collect the projectiles of the player
     for projectile in game.player.all_projectiles:
         projectile.move()
@@ -30,6 +33,7 @@ while running:
     # collect the monsters in the game and make them move
     for monster in game.all_monsters:
         monster.forward()
+        monster.update_health_bar(screen)
 
     # attribute the image to the group of the projectiles
     game.player.all_projectiles.draw(screen)

@@ -1,5 +1,7 @@
 import pygame
 from projectile import Projectile
+
+
 # create a class player
 class Player(pygame.sprite.Sprite):  # the class herite form the class sprite
     # (classe pour les objets graphique qui se deplacent)
@@ -17,6 +19,10 @@ class Player(pygame.sprite.Sprite):  # the class herite form the class sprite
         self.rect.x = 400
         self.rect.y = 500
 
+    def damage(self, amount):
+        if self.health - amount > amount:
+            self.health -= amount
+
     def launch_projectile(self):
         projectile = Projectile(self)
         self.all_projectiles.add(projectile)
@@ -29,3 +35,19 @@ class Player(pygame.sprite.Sprite):  # the class herite form the class sprite
     def move_left(self):
         self.rect.x -= self.velocity
 
+    def update_health_bar(self, surface):
+        # define a color for the health bar
+        bar_color = (111, 210, 46)  # color with the code RGB
+
+        # define a color for the background of the health bar
+        back_bar_color = (60, 63, 60)
+
+        # define the position of the health bar and it width and thickness
+        bar_position = [self.rect.x + 50, self.rect.y, self.health, 7]
+
+        # define the position of the background of the health bar
+        back_bar_position = [self.rect.x + 50, self.rect.y, self.max_health, 7]
+
+        # draw the health bar
+        pygame.draw.rect(surface, back_bar_color, back_bar_position)
+        pygame.draw.rect(surface, bar_color, bar_position)
