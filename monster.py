@@ -1,6 +1,7 @@
 import pygame
 import random
 
+
 class Monster(pygame.sprite.Sprite):
 
     def __init__(self, game):
@@ -20,7 +21,7 @@ class Monster(pygame.sprite.Sprite):
         self.health -= amount
 
         # check if the health is zero
-        if self.health <=0:
+        if self.health <= 0:
             # reappear like a new monster
             self.rect.x = 1000 + random.randint(0, 300)
             self.velocity = random.randint(1, 3)
@@ -28,7 +29,7 @@ class Monster(pygame.sprite.Sprite):
 
     def update_health_bar(self, surface):
         # define a color for the health bar
-        bar_color = (111, 210, 46) # color with the code RGB
+        bar_color = (111, 210, 46)  # color with the code RGB
 
         # define a color for the background of the health bar
         back_bar_color = (60, 63, 60)
@@ -51,4 +52,3 @@ class Monster(pygame.sprite.Sprite):
         else:
             # inflict damage to the player
             self.game.player.damage(self.attack)
-

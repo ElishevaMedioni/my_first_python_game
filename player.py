@@ -22,6 +22,9 @@ class Player(pygame.sprite.Sprite):  # the class herite form the class sprite
     def damage(self, amount):
         if self.health - amount > amount:
             self.health -= amount
+        else:
+            # if the player has no more life points
+            self.game.game_over()
 
     def launch_projectile(self):
         projectile = Projectile(self)
